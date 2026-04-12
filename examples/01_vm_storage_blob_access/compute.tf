@@ -6,7 +6,7 @@ module "compute" {
   resource_group_name = azurerm_resource_group.foggykitchen_rg.name
 
   deployment_mode = "vm"
-  subnet_id       = module.vnet.subnet_ids["fk-subnet-public"]
+  subnet_id       = module.vnet.subnet_ids["fk-subnet"]
   identity_type   = "SystemAssigned"
 
   admin_username = var.admin_username

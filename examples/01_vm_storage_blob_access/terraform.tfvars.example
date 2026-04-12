@@ -1,6 +1,6 @@
 location            = "westeurope"
 resource_group_name = "fk-rg"
-vnet_name           = "fk-vnet-with-subnets"
+vnet_name           = "fk-vnet"
 vm_name             = "fk-storage-client-vm"
 storage_name_prefix = "fksa"
 

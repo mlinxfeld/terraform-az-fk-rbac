@@ -13,7 +13,7 @@ variable "resource_group_name" {
 variable "vnet_name" {
   description = "Virtual network name"
   type        = string
-  default     = "fk-vnet-with-subnets"
+  default     = "fk-vnet"
 }
 
 variable "vm_name" {
@@ -40,17 +40,14 @@ variable "vnet_address_space" {
 }
 
 variable "subnets" {
-  description = "Purpose-driven subnets"
+  description = "Subnet map for the example virtual network"
   type = map(object({
     address_prefixes = list(string)
   }))
 
   default = {
-    fk-subnet-public = {
+    fk-subnet = {
       address_prefixes = ["10.10.0.0/24"]
-    }
-    fk-subnet-private = {
-      address_prefixes = ["10.10.1.0/24"]
     }
   }
 }

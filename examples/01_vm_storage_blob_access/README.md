@@ -21,7 +21,7 @@ on the Storage Account scope via the `terraform-az-fk-rbac` module.
 
 This example creates:
 - One **Resource Group**
-- One **Virtual Network** with two subnets via `terraform-az-fk-vnet`
+- One **Virtual Network** with a single subnet via `terraform-az-fk-vnet`
 - One **Linux Virtual Machine** via `terraform-az-fk-compute`
 - One **Storage Account (StorageV2)** via `terraform-az-fk-storage`
 - Two **private Blob Containers** (`artifacts`, `logs`) via `terraform-az-fk-storage`

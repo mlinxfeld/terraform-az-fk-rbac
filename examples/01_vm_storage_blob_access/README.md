@@ -19,6 +19,8 @@ The VM is created with a **system-assigned managed identity**.
 That identity receives the **Storage Blob Data Contributor** role
 on the Storage Account scope via the `terraform-az-fk-rbac` module.
 
+<img src="01_vm_storage_blob_access_architecture.png" width="900"/>
+
 This example creates:
 - One **Resource Group**
 - One **Virtual Network** with a single subnet via `terraform-az-fk-vnet`

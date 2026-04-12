@@ -1,0 +1,49 @@
+#cloud-config
+package_update: true
+packages:
+  - ca-certificates
+  - curl
+  - apt-transport-https
+  - lsb-release
+  - gnupg
+
+write_files:
+  - path: /usr/local/bin/blob-proof.sh
+    permissions: "0755"
+    owner: root:root
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      ACCOUNT_NAME="${1:-}"
+      CONTAINER_NAME="${2:-logs}"
+      BLOB_NAME="${3:-proof.txt}"
+      CONTENT="${4:-managed identity upload test}"
+
+      if [[ -z "${ACCOUNT_NAME}" ]]; then
+        echo "usage: blob-proof.sh <storage-account-name> [container-name] [blob-name] [content]" >&2
+        exit 1
+      fi
+
+      TMP_FILE="$(mktemp)"
+      trap 'rm -f "${TMP_FILE}"' EXIT
+
+      printf '%s\n' "${CONTENT}" > "${TMP_FILE}"
+
+      az login --identity --allow-no-subscriptions 1>/dev/null
+      az storage blob upload \
+        --account-name "${ACCOUNT_NAME}" \
+        --container-name "${CONTAINER_NAME}" \
+        --name "${BLOB_NAME}" \
+        --file "${TMP_FILE}" \
+        --auth-mode login \
+        --overwrite true
+
+runcmd:
+  - install -d -m 0755 /etc/apt/keyrings
+  - curl -sLS https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/keyrings/microsoft.gpg >/dev/null
+  - chmod go+r /etc/apt/keyrings/microsoft.gpg
+  - AZ_REPO=$(lsb_release -cs)
+  - echo "deb [arch=amd64,arm64 signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ ${AZ_REPO} main" > /etc/apt/sources.list.d/azure-cli.list
+  - apt-get update
+  - apt-get install -y azure-cli

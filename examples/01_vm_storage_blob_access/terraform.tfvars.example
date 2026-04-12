@@ -1,0 +1,12 @@
+location            = "westeurope"
+resource_group_name = "fk-rg"
+vnet_name           = "fk-vnet-with-subnets"
+vm_name             = "fk-storage-client-vm"
+storage_name_prefix = "fksa"
+
+tags = {
+  project = "foggykitchen"
+  module  = "terraform-az-fk-rbac"
+  example = "01_vm_storage_blob_access"
+  env     = "dev"
+}

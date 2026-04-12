@@ -125,10 +125,15 @@ az storage blob list \
 
 ## 🖼️ Azure Portal View
 
-The screenshots below capture the same scenario in the Azure Portal:
+The screenshots below capture the same scenario in the Azure Portal.
 
-- [01_vm_storage_blob_access_portal1.png](./01_vm_storage_blob_access_portal1.png) shows the `Storage Blob Data Contributor` role assigned to the VM managed identity on the Storage Account scope
-- [01_vm_storage_blob_access_portal2.png](./01_vm_storage_blob_access_portal2.png) shows the uploaded `proof.txt` blob inside the `logs` container
+<img src="01_vm_storage_blob_access_portal1.png" width="900"/>
+
+*Figure 1. `Storage Blob Data Contributor` assigned to the VM managed identity on the Storage Account scope.*
+
+<img src="01_vm_storage_blob_access_portal2.png" width="900"/>
+
+*Figure 2. `proof.txt` uploaded to the `logs` container after the managed identity validation step.*
 
 ---
 
@@ -136,7 +141,7 @@ The screenshots below capture the same scenario in the Azure Portal:
 
 ```hcl
 module "rbac" {
-  source = "../../"
+  source = "git::https://github.com/mlinxfeld/terraform-az-fk-rbac.git?ref=v0.1.0"
 
   scope                = module.storage.storage_account_id
   principal_id         = module.compute.vm_principal_id

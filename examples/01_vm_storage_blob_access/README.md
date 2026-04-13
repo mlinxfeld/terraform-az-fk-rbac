@@ -143,7 +143,7 @@ The screenshots below capture the same scenario in the Azure Portal.
 
 ```hcl
 module "rbac" {
-  source = "git::https://github.com/mlinxfeld/terraform-az-fk-rbac.git?ref=v0.1.0"
+  source = "github.com/mlinxfeld/terraform-az-fk-rbac"
 
   scope                = module.storage.storage_account_id
   principal_id         = module.compute.vm_principal_id

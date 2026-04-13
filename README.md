@@ -55,6 +55,7 @@ Each of those concerns belongs in its **own dedicated module**.
 terraform-az-fk-rbac/
 ├── examples/
 │   ├── 01_vm_storage_blob_access/
+│   ├── 02_aks_with_acr_attach/
 │   └── README.md
 ├── main.tf
 ├── variables.tf
@@ -84,6 +85,23 @@ This module is intentionally minimal:
 - `role_definition_name` defines what access is granted
 
 That makes the module easy to compose with other FoggyKitchen Azure modules.
+
+---
+
+## 🧪 Example Scenarios
+
+The repository currently includes two end-to-end examples:
+
+- `examples/01_vm_storage_blob_access` shows a VM managed identity receiving
+  `Storage Blob Data Contributor` on a Storage Account scope
+- `examples/02_aks_with_acr_attach` shows an AKS kubelet identity receiving
+  `AcrPull` on an Azure Container Registry scope
+
+These examples demonstrate the same module pattern reused across different Azure services:
+
+- principal comes from a dedicated workload module
+- scope comes from a dedicated resource module
+- RBAC stays explicit as a small composition layer
 
 ---
 

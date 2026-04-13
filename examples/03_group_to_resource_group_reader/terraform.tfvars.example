@@ -1,0 +1,3 @@
+resource_group_name = "fk-rg-reader"
+location            = "westeurope"
+group_name_prefix   = "fk-rg-readers"

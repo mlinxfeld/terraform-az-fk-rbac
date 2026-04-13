@@ -13,6 +13,7 @@ These examples are part of the **[FoggyKitchen.com training ecosystem](https://f
 |:-------:|:------|:-----------|
 | 01 | **VM Access To Blob Storage** | Managed identity, Storage Blob Data Contributor, VM-to-Storage RBAC wiring |
 | 02 | **AKS With ACR Attach** | AKS kubelet identity, ACR scope, explicit AcrPull role assignment |
+| 03 | **Group Reader On Resource Group** | Entra ID security group, Resource Group scope, explicit Reader role assignment |
 
 Each example builds on the **concepts** introduced in the previous one, but can be applied
 independently for learning and experimentation.
@@ -36,7 +37,7 @@ tofu apply
 ```
 
 You can apply examples independently. As the module grows, the **recommended approach is sequential**:
-01 → 02
+01 → 02 → 03
 
 This mirrors real-world RBAC design, where you typically start with a single principal, a single scope, and a single role before combining authorization with private networking or broader platform patterns.
 

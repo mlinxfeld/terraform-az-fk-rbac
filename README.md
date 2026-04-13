@@ -56,6 +56,7 @@ terraform-az-fk-rbac/
 ├── examples/
 │   ├── 01_vm_storage_blob_access/
 │   ├── 02_aks_with_acr_attach/
+│   ├── 03_group_to_resource_group_reader/
 │   └── README.md
 ├── main.tf
 ├── variables.tf
@@ -70,7 +71,7 @@ terraform-az-fk-rbac/
 
 ```hcl
 module "rbac" {
-  source = "git::https://github.com/mlinxfeld/terraform-az-fk-rbac.git?ref=v0.1.0"
+  source = "github.com/mlinxfeld/terraform-az-fk-rbac"
 
   scope                = module.storage.storage_account_id
   principal_id         = module.compute.vm_principal_id
@@ -90,12 +91,14 @@ That makes the module easy to compose with other FoggyKitchen Azure modules.
 
 ## 🧪 Example Scenarios
 
-The repository currently includes two end-to-end examples:
+The repository currently includes three end-to-end examples:
 
 - `examples/01_vm_storage_blob_access` shows a VM managed identity receiving
   `Storage Blob Data Contributor` on a Storage Account scope
 - `examples/02_aks_with_acr_attach` shows an AKS kubelet identity receiving
   `AcrPull` on an Azure Container Registry scope
+- `examples/03_group_to_resource_group_reader` shows an Entra ID security group
+  receiving `Reader` on an Azure Resource Group scope
 
 These examples demonstrate the same module pattern reused across different Azure services:
 
